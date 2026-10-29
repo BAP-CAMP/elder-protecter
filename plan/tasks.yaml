@@ -9,7 +9,7 @@
 # 更新规则: 任何人改变任务状态都必须同时改本文件，并在 PR 里说明。
 
 version: 3
-updated: "2026-10-03"
+updated: "2026-10-29"
 
 repo:
   owner: liuchun878
@@ -862,3 +862,12 @@ critical_sync:
   must_finish_first: H0
   why: "R 与 S 依赖命令接口存在；空实现即可，不必完整逻辑"
   fallback: "若 H0 延后，R 与 S 先按契约写接入代码 + 用假数据自测，不空等"
+
+# BAP-CAMP fork only; original student milestones above remain historical records.
+collective_adaptation:
+  branch: codex/collective-demo
+  status: review
+  owner: BAP
+  scope: "Independent static exhibit, attribution, opt-in audio, pause lifecycle and relative family-app path"
+  validation: "Browser checks: confirmed / missed / reset, muted default, pause, WebGL-to-2D fallback"
+  pending: "Physical device review and explicit authorization for push/deployment"

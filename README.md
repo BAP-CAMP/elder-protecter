@@ -215,3 +215,10 @@ bash scripts/push-stage.sh <tag> "<验收声明>"
 
 - 本项目代码：MIT，见 [LICENSE](LICENSE)
 - 第三方：Three.js **0.186.1**（MIT，本地 vendored），版本、来源与 sha256 见 [THIRD-PARTY.md](THIRD-PARTY.md)
+
+
+## Collective 展示适配
+
+原作者、采用版本及贡献记录见 [ATTRIBUTION.md](ATTRIBUTION.md)。
+独立静态入口：`/demo/elder-protecter/`。官网只加载静态封面，点击后才进入交互。
+构建与验收见 [exhibit/README.md](exhibit/README.md)。

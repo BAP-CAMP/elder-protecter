@@ -74,7 +74,7 @@ function mountBanner() {
    * 这里明示一句，并在首次点击/按键后隐藏；`audio.attachUnlock()` 会把被掐掉的那句补播一次。 */
   const voiceNote = document.createElement('p');
   voiceNote.className = 'banner__item';
-  voiceNote.textContent = '点一下页面即可听到语音（浏览器要求先有一次交互）';
+  voiceNote.textContent = '声音默认关闭，可使用声音开关开启。';
   banner.appendChild(voiceNote);
   const hideVoiceNote = () => {
     voiceNote.hidden = true;
@@ -113,7 +113,7 @@ function ensurePhone() {
     '<div class="phone__notch"></div>',
     '<div class="phone__title">家属端（点右上 ⌄ 展开）</div>',
     // v1.17：手机屏内容 = **队友做的家属端 App**（仓库根 `family-app/`，由禁缓存服务器双根提供）
-    '<iframe class="phone__screen" title="家属端（队友做的 App）" src="/family-app/index.html"></iframe>',
+    '<iframe class="phone__screen" title="家属端（队友做的 App）" src="./family-app/index.html"></iframe>',
     '<div class="phone__tabs">'
     + '<button type="button" class="phone__tab is-on" data-app="family-app/index.html">家属端</button>'
     + '<button type="button" class="phone__tab" data-app="family-app/robot-settings.html">机器人设置</button>'
@@ -125,7 +125,7 @@ function ensurePhone() {
   for (const tab of phone.querySelectorAll('.phone__tab')) {
     tab.addEventListener('click', () => {
       const app = tab.dataset.app;
-      phone.querySelector('.phone__screen').src = `/${app}`;
+      phone.querySelector('.phone__screen').src = `./${app}`;
       for (const t of phone.querySelectorAll('.phone__tab')) t.classList.toggle('is-on', t === tab);
     });
   }
@@ -1329,7 +1329,12 @@ function startMainView() {
   // 固定演示：从初始态开始按剧本走（`?mode=scripted` 或左下角按钮切的）
   if (mode === 'scripted') applyMode('scripted');
   let last = performance.now();
+  let exhibitPaused = !!document.documentElement.dataset.exhibitPaused;
+  if (exhibitPaused) clock.stop();
+  addEventListener('exhibit:pause', () => { exhibitPaused = true; clock.stop(); script?.pause(); audio.hush(); });
+  addEventListener('exhibit:resume', () => { exhibitPaused = false; last = performance.now(); clock.start(); requestAnimationFrame(frame); });
   function frame(now) {
+    if (exhibitPaused) return;
     // v1.21：单帧上限 0.1 → 0.2 s。软渲染只有 2–5 fps 时，0.1 s 的上限会把仿真**饿死**
     // （机器人实际只走 30% 速度，还没到老人跟前，确认窗口就到期了 → 事件转 missed、取药根本没发生）。
     const dt = scaledDt(Math.min((now - last) / 1000, 0.2));

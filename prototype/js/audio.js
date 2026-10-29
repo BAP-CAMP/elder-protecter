@@ -10,7 +10,7 @@
 const TONE_HZ = 520; // 低频方波量级（调研：520 Hz 方波对老年人可听度更好；绝不使用 3100 Hz 高频）
 const TONE_MS = 700;
 
-let enabled = true;
+let enabled = false;
 let audioContext = null;
 let unlocked = false;
 let lastSpoken = '';
@@ -124,7 +124,7 @@ const CLIP_BASE = './assets/voice/';
 const CLIP_PARAM = typeof window !== 'undefined'
   ? new URLSearchParams(window.location.search).get('voiceclip')
   : null;
-const USE_CLIPS = CLIP_PARAM !== '0';
+const USE_CLIPS = CLIP_PARAM === '1';
 
 let zhVoice = null;
 let clipAudio = null;

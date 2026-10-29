@@ -43,3 +43,8 @@ recordings/*.tmp
 .tools/
 # 建模预览（仅本地开发用：model.html / shoot.mjs / 对比截图，不属于交付物）
 .preview/
+
+# Local Collective build and verification artifacts
+/exhibit-dist/
+/temp/
+/.tools/

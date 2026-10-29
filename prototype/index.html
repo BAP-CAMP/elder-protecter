@@ -22,6 +22,7 @@
     -->
   </head>
   <body>
+    <div id="entry-loading" role="status" style="position:fixed;inset:0;z-index:12000;background:#edf2ef;display:grid;place-content:center;padding:28px;font:18px/1.6 system-ui;color:#25474a">正在加载仿真模块…</div>
     <div id="main-view" class="main-view">
       <div id="scene" class="scene" aria-hidden="true"></div>
       <div id="hud" class="hud"></div>
@@ -47,6 +48,10 @@
         }
       }
     </script>
-    <script type="module" src="./js/main.js"></script>
+    <script type="module">
+      const status = document.getElementById('entry-loading');
+      try { await import('./js/main.js'); status.remove(); }
+      catch (error) { status.replaceChildren(document.createTextNode('仿真暂时无法加载。请检查网络后重试。')); const button = document.createElement('button'); button.textContent = '重新加载'; button.onclick = () => location.reload(); status.append(button); console.error(error); }
+    </script>
   </body>
 </html>

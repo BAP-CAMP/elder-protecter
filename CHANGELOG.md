@@ -9,6 +9,14 @@
 
 ---
 
+## Collective local adaptation — 2026-10-29 — Local review, not deployed
+
+- Preserve the original simulation and state-machine semantics, including pickup versus ingestion.
+- Add a relative family-app path, muted default audio, explicit pause/resume lifecycle, device guidance, loading failure retry and author/source information.
+- Build an allowlisted static exhibit; preserve upstream history and license.
+- Browser checks pass for confirmation, missed confirmation, reset, pause and WebGL fallback. Physical device review and publication remain pending.
+
+
 ## `v1.20-保卫老人` — 2026-10-04 — 里程碑定名「保卫老人」+ 清掉 `0000000` 合并遗留的冲突标记
 
 用户口径：**「把这个 pull 到 https://github.com/liuchun878/elder-protecter 里，命名为：保卫老人」**
