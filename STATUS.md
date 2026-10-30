@@ -560,3 +560,7 @@ node scripts/record-promo.mjs --no-sandbox            # 需要 ffmpeg 在 PATH�
 7. **【已闭环】落座断言与走位**：`.preview/sitfix.mjs`（8/8）+ `.preview/clicklive.mjs`（真鼠标事件）
    + `.preview/walkdiag.mjs`（逐帧采样）已把"到落座点 ≤0.15 m / 进入坐姿 / 不穿墙不穿家具 / 人在取景里"
    四条钉住。**结论与 v1.8 的记录相反**：基线落座是好的，真正缺的是"沿 `findPath` 走"（v1.9 已补）。
+
+## Collective lifecycle maintenance (2026-10-30)
+
+The BAP display adaptation freezes the clock during page suspension without catch-up, preserves scripted playback intent and shows a compact resume notice. Local deterministic clock and desktop/mobile browser lifecycle checks passed. This is a website maintenance change, not physical robot or clinical validation. The user authorized source push and website 1.1.1 deployment; release evidence is retained with the website.

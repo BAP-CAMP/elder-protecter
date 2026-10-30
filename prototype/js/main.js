@@ -1329,11 +1329,24 @@ function startMainView() {
   // 固定演示：从初始态开始按剧本走（`?mode=scripted` 或左下角按钮切的）
   if (mode === 'scripted') applyMode('scripted');
   let last = performance.now();
-  let exhibitPaused = !!document.documentElement.dataset.exhibitPaused;
-  if (exhibitPaused) clock.stop();
-  addEventListener('exhibit:pause', () => { exhibitPaused = true; clock.stop(); script?.pause(); audio.hush(); });
-  addEventListener('exhibit:resume', () => { exhibitPaused = false; last = performance.now(); clock.start(); requestAnimationFrame(frame); });
+  let exhibitPaused = false, pendingFrame = 0, resumeClock = false, resumeScript = false;
+  const suspendExhibit = () => {
+    if (exhibitPaused) return;
+    exhibitPaused = true; resumeClock = clock.isRunning();
+    const status = script?.status(); resumeScript = !!status?.running && !status.paused;
+    clock.stop(); if (resumeScript) script.pause(); audio.hush();
+    cancelAnimationFrame(pendingFrame); pendingFrame = 0;
+  };
+  addEventListener('exhibit:pause', suspendExhibit);
+  addEventListener('exhibit:resume', () => {
+    if (!exhibitPaused) return;
+    exhibitPaused = false; last = performance.now();
+    if (resumeClock) clock.start(); if (resumeScript) script.resume();
+    if (!pendingFrame) pendingFrame = requestAnimationFrame(frame);
+  });
+  if (document.hidden || document.documentElement.dataset.exhibitPaused) suspendExhibit();
   function frame(now) {
+    pendingFrame = 0;
     if (exhibitPaused) return;
     // v1.21：单帧上限 0.1 → 0.2 s。软渲染只有 2–5 fps 时，0.1 s 的上限会把仿真**饿死**
     // （机器人实际只走 30% 速度，还没到老人跟前，确认窗口就到期了 → 事件转 missed、取药根本没发生）。
@@ -1351,9 +1364,11 @@ function startMainView() {
     }
     watchFamilyNotifications(); // v1.18：未确认 → 家属手机弹出推送
     scene.render(latest, dt);
-    window.requestAnimationFrame(frame);
+    pendingFrame = window.requestAnimationFrame(frame);
   }
-  window.requestAnimationFrame(frame);
+  if (!exhibitPaused) pendingFrame = window.requestAnimationFrame(frame);
+  document.documentElement.dataset.exhibitReady='true';
+  dispatchEvent(new Event('exhibit:ready'));
 
   audio.attachUnlock();
   // v1.11 童声：优先用系统里的童声（没有就男声抬高音调），并在音色列表变化时重选

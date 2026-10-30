@@ -38,7 +38,7 @@ export function createClock({ demoStart = DEFAULT_DEMO_START, acceleration = 60,
   let manualMode = manual;
 
   function demoMs() {
-    if (manualMode) return baseDemoMs;
+    if (manualMode || !running) return baseDemoMs;
     return baseDemoMs + (Date.now() - baseRealMs) * acc;
   }
 
@@ -64,11 +64,13 @@ export function createClock({ demoStart = DEFAULT_DEMO_START, acceleration = 60,
   return {
     start() {
       if (timer) return;
+      baseRealMs = Date.now();
       running = true;
       timer = window.setInterval(() => emit(), intervalMs);
       emit();
     },
     stop() {
+      if (running) rebase(demoMs());
       running = false;
       if (timer) window.clearInterval(timer);
       timer = null;

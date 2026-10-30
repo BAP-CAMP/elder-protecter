@@ -1159,3 +1159,7 @@ T+60s `voice/v1 → screen/v2`（换通道换措辞）✅ ｜ T+180s 家属端�
 - 任何原型代码（P1 起）
 - `契约-接口.md`（P1 冻结）
 - `LICENSE` / `THIRD-PARTY.md`（P1 vendor 时加入）
+
+## Collective display maintenance — 2026-10-30
+
+Freeze the demonstration clock without background catch-up, preserve fixed-script playback intent, and replace the fullscreen pause overlay with an accessible compact resume bar. Source scenes and original attribution are retained.

@@ -870,4 +870,10 @@ collective_adaptation:
   owner: BAP
   scope: "Independent static exhibit, attribution, opt-in audio, pause lifecycle and relative family-app path"
   validation: "Browser checks: confirmed / missed / reset, muted default, pause, WebGL-to-2D fallback"
-  pending: "Physical device review and explicit authorization for push/deployment"
+  pending: "Physical device review remains separate; website 1.1.1 source push and deployment authorized for this maintenance release"
+
+collective_lifecycle_111:
+  owner: BAP
+  status: done
+  scope: "Freeze demonstration time and preserve scripted playback during non-destructive exhibit suspension"
+  validation: "Deterministic clock test and actual desktop/mobile pause/resume browser regression passed"

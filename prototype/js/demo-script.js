@@ -206,7 +206,7 @@ export function createDemoScript(deps) {
     if (linger > 0) {
       const nap = Math.max(1, Math.round(linger / (stepDriver ? stepSeconds : 0.12)));
       dbg = { ...dbg, linger, nap };
-      for (let k = 0; k < nap && !cancelled; k += 1) await waitNext();
+      for (let k = 0; k < nap && !cancelled;) { await waitNext(); if (!paused) k += 1; }
     }
     return true;
   }
