@@ -12,5 +12,7 @@
   "device": "电脑或平板，支持 WebGL；无摄像头需求。",
   "note": "虚构居家送药仿真。取药确认不等于服药。",
   "adoptedBranch": "main",
-  "repositoryVisibility": "public"
+  "repositoryVisibility": "public",
+  "team": "保卫老人小组",
+  "attributionType": "Camp001 参赛小组"
 }

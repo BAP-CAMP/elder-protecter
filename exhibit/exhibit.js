@@ -1,6 +1,6 @@
 /* Collective entry chrome. Each app owns its pause/resume implementation. */
 (() => {
- const root=new URL('.',document.currentScript.src), meta={"title": "保卫老人", "slug": "elder-protecter", "upstream": "https://github.com/liuchun878/elder-protecter", "fork": "https://github.com/BAP-CAMP/elder-protecter", "base": "5216cbac45bea7915251facf2580e11efbc4b415", "authors": ["IXaglis", "YuMi-06", "liuchun878"], "device": "电脑或平板，支持 WebGL；无摄像头需求。", "note": "虚构居家送药仿真。取药确认不等于服药。"};
+ const root=new URL('.',document.currentScript.src), meta={"title": "保卫老人", "slug": "elder-protecter", "upstream": "https://github.com/liuchun878/elder-protecter", "fork": "https://github.com/BAP-CAMP/elder-protecter", "base": "5216cbac45bea7915251facf2580e11efbc4b415", "authors": ["IXaglis", "YuMi-06", "liuchun878"], "device": "电脑或平板，支持 WebGL；无摄像头需求。", "note": "虚构居家送药仿真。取药确认不等于服药。", "adoptedBranch": "main", "repositoryVisibility": "public", "team": "保卫老人小组", "attributionType": "Camp001 参赛小组"};
  let paused=false;
  const style=document.createElement('style');style.textContent=`
  .exhibit-nav{position:fixed;z-index:10000;right:12px;bottom:12px;display:flex;gap:12px;align-items:center;background:#151816;color:#f5f5f1;padding:10px 16px;border:1px solid #647068;border-radius:6px;font:14px/1.4 system-ui;box-shadow:0 2px 16px #0003}
@@ -12,7 +12,7 @@
  `;document.head.append(style);
  const nav=document.createElement('nav');nav.className='exhibit-nav';nav.setAttribute('aria-label','作品导航');
  const back=document.createElement('a');back.href='/practices/collective/';back.textContent='返回 Collective';
- const about=document.createElement('a');about.href=new URL('about.html',root);about.textContent='原作与说明';
+ const about=document.createElement('a');about.href=new URL('about.html',root);about.textContent='作者：'+meta.team;about.setAttribute('aria-label',meta.team+'，查看原作与说明');
  const pauseButton=document.createElement('button');pauseButton.textContent='暂停体验';nav.append(back,about,pauseButton);document.body.append(nav);
  if(meta.slug==='elder-protecter'&&matchMedia('(max-width:700px)').matches){
   const hint=document.createElement('aside');hint.style.cssText='position:fixed;inset:20% 20px auto;z-index:15000;padding:24px;background:#f4f5ef;color:#173a3d;border:1px solid #78999b;border-radius:12px;font:17px/1.6 system-ui;box-shadow:0 12px 100px #0009';

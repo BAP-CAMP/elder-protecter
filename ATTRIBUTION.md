@@ -1,5 +1,7 @@
 # 原作与展示适配
 
+公开作品署名：**保卫老人小组**（Camp001 参赛小组，2026-10-30 确认）。以下 GitHub 标识保留为原始贡献记录，不用于推断学生真实姓名或分工。
+
 原作：[liuchun878/elder-protecter](https://github.com/liuchun878/elder-protecter)。
 
 采用版本：`5216cbac45bea7915251facf2580e11efbc4b415`。原始提交历史完整保留。
